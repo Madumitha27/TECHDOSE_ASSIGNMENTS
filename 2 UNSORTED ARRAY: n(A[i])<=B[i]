@@ -1,0 +1,103 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+void merge(int arr[],int start,int mid,int end)
+{
+    int l=mid-start+1;
+    int r=end-mid;
+    int left[l],right[r];
+    for(int i=0;i<l;i++)
+    {
+        left[i]=arr[start+i];
+    }
+    for(int i=0;i<r;i++)
+    {
+        right[i]=arr[mid+i+1];
+    }
+    int lptr=0,rptr=0,kptr=start;
+    while(lptr<l&&rptr<r)
+    {
+        if(left[lptr]<right[rptr])
+        arr[kptr++]=left[lptr++];
+        else
+        arr[kptr++]=right[rptr++];
+    }
+    while(lptr<l)
+    {
+        arr[kptr++]=left[lptr++];
+    }
+    while(rptr<r)
+    {
+        arr[kptr++]=right[rptr++];
+    }
+}
+void mergesort(int arr[],int start,int end)
+{
+    if(start<end)
+    {
+        int mid=start+(end-start)/2;
+    mergesort(arr,start,mid);
+    mergesort(arr,mid+1,end);
+    merge(arr,start,mid,end);
+    }
+}
+
+int main()
+{
+    int arr1[]={3,7,12,5,17,3,9,0,2,34,15,25,6};   
+    int arr2[]={4,7,1,18,83,23,12,4,21,7};
+    mergesort(arr1,0,12);
+    mergesort(arr2,0,9);
+    int res[10],index=0;
+    for(int i=0;i<10;i++)
+    {
+        while(index<13&&arr1[index]<=arr2[i])
+        {
+            index++;
+        }
+        res[i]=index;
+    }
+    for(int i=0;i<13;i++)
+    {
+        printf("%d ",arr1[i]);
+    }
+    printf("\n");
+    for(int i=0;i<10;i++)
+    {
+        printf("%d ",arr2[i]);
+    }
+    printf("\n");
+    for(int i=0;i<10;i++)
+    {
+        printf("%d ",res[i]);
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
